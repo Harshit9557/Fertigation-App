@@ -2,8 +2,6 @@ import 'package:fertigation/bloc/settings/settings_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 /// Displays the various settings that can be customized by the user.
 ///
 /// When a user changes a setting, the SettingsController is updated and
@@ -15,7 +13,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.settings),
+        title: const Text('Settings'),
       ),
       body: BlocBuilder<SettingsBloc, SettingsState>(
         buildWhen: (previous, current) =>
@@ -36,22 +34,25 @@ class SettingsScreen extends StatelessWidget {
                     .read<SettingsBloc>()
                     .add(UpdateThemeEvent(themeMode: value!));
               },
-              items: [
+              items: const [
                 DropdownMenuItem(
                   value: ThemeMode.system,
                   child: Text(
-                      '${AppLocalizations.of(context)!.system} ${AppLocalizations.of(context)!.theme}'),
+                    'System Theme',
+                  ),
                 ),
                 DropdownMenuItem(
                   value: ThemeMode.light,
                   child: Text(
-                      '${AppLocalizations.of(context)!.light} ${AppLocalizations.of(context)!.theme}'),
+                    'Light Theme',
+                  ),
                 ),
                 DropdownMenuItem(
                   value: ThemeMode.dark,
                   child: Text(
-                      '${AppLocalizations.of(context)!.dark} ${AppLocalizations.of(context)!.theme}'),
-                )
+                    'Dark Theme',
+                  ),
+                ),
               ],
             ),
           );
