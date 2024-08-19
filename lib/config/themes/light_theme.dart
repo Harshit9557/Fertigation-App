@@ -5,13 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 ThemeData lightTheme = ThemeData.light().copyWith(
   dividerColor: ThemeConfig.dividerColorLight,
   appBarTheme: AppBarTheme(
+    elevation: 3,
     centerTitle: false,
-    titleSpacing: 20.w,
+    titleSpacing: 5.w,
     titleTextStyle: ThemeData.light().textTheme.displayLarge!.copyWith(
           fontFamily: ThemeConfig.pangramRegular,
           color: Colors.black,
-          fontSize: 22.sp,
-          fontWeight: FontWeight.w600,
+          fontSize: 18.sp,
+          fontWeight: FontWeight.bold,
         ),
     toolbarTextStyle: ThemeData.light().textTheme.displayMedium!.copyWith(
           fontFamily: ThemeConfig.pangramRegular,
@@ -24,6 +25,7 @@ ThemeData lightTheme = ThemeData.light().copyWith(
       color: Colors.black,
     ),
     backgroundColor: Colors.transparent,
+    surfaceTintColor: Colors.white,
   ),
   colorScheme: ThemeData.light().colorScheme.copyWith(
         secondary: const Color(0xffa1a1a1),

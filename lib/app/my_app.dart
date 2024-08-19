@@ -1,3 +1,6 @@
+import 'package:fertigation/bloc/bloc/reviews_bloc.dart';
+import 'package:fertigation/main.dart';
+
 import 'app.dart';
 
 /// The Widget that configures your application.
@@ -13,9 +16,13 @@ class FertigationApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => SettingsBloc()),
+        BlocProvider(create: (_) => TabbarBloc()),
+        BlocProvider(create: (_) => ReviewsBloc(getIt())),
       ],
       child: ScreenUtilInit(builder: (context, _) {
         return BlocBuilder<SettingsBloc, SettingsState>(
+          buildWhen: (previous, current) =>
+              previous.themeMode != current.themeMode,
           builder: (context, state) {
             return MaterialApp(
               //Set this false to hide the debug banner
