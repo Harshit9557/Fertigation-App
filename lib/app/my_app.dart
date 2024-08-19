@@ -1,3 +1,6 @@
+import 'package:fertigation/bloc/bloc/reviews_bloc.dart';
+import 'package:fertigation/main.dart';
+
 import 'app.dart';
 
 /// The Widget that configures your application.
@@ -14,6 +17,7 @@ class FertigationApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => SettingsBloc()),
         BlocProvider(create: (_) => TabbarBloc()),
+        BlocProvider(create: (_) => ReviewsBloc(getIt())),
       ],
       child: ScreenUtilInit(builder: (context, _) {
         return BlocBuilder<SettingsBloc, SettingsState>(

@@ -1,3 +1,4 @@
+import 'package:fertigation/repository/review_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -15,6 +16,6 @@ void main() async {
 }
 
 void servicesLocator() {
-  // getIt.registerLazySingleton<ChatRepository>(() =>
-  //     ChatRepository()); // Registering ChatRepository as a lazy singleton for ChatBloc
+  getIt.registerLazySingleton<ReviewRepository>(() =>
+      ReviewRepository()); // Registering ChatRepository as a lazy singleton for ChatBloc
 }

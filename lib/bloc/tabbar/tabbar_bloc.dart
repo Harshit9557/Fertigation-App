@@ -10,6 +10,6 @@ class TabbarBloc extends Bloc<TabbarEvent, TabbarState> {
   }
   void _updateTabBarIndex(
       UpdateTabBarIndex event, Emitter<TabbarState> emit) async {
-    emit(state.copyWith(event.tabBarIndex));
+    emit(state.copyWith(tabBarIndex: event.tabBarIndex));
   }
 }

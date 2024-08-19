@@ -1,8 +1,16 @@
 import 'package:fertigation/app/app.dart';
+import 'package:fertigation/models/review_item_model.dart';
 
 class ReviewCard extends StatefulWidget {
-  const ReviewCard({super.key, required this.isSequential});
+  const ReviewCard({
+    super.key,
+    required this.isSequential,
+    required this.index,
+    required this.reviewItem,
+  });
   final bool isSequential;
+  final int index;
+  final ReviewItemModel reviewItem;
 
   @override
   State<ReviewCard> createState() => _ReviewCardState();
@@ -11,11 +19,7 @@ class ReviewCard extends StatefulWidget {
 class _ReviewCardState extends State<ReviewCard> {
   double start = 40;
   double end = 120;
-  List<String> injectorTitles = [
-    'Tank 1',
-    'Volume 500 litres',
-    'Bulk Mode',
-  ];
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsBloc, SettingsState>(
@@ -31,7 +35,7 @@ class _ReviewCardState extends State<ReviewCard> {
                     children: [
                       Expanded(
                         child: Text(
-                          'Injector 1',
+                          widget.reviewItem.device!,
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall
@@ -55,7 +59,7 @@ class _ReviewCardState extends State<ReviewCard> {
                             padding: EdgeInsets.all(8.0.sp),
                             child: Center(
                               child: Text(
-                                '1',
+                                '${widget.index + 1}',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge
@@ -81,7 +85,7 @@ class _ReviewCardState extends State<ReviewCard> {
                           width: 15.w,
                           child: ListView.builder(
                             shrinkWrap: true,
-                            itemCount: 3,
+                            itemCount: state.tabBarIndex == 0 ? 3 : 2,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index1) {
                               return Row(
@@ -100,7 +104,10 @@ class _ReviewCardState extends State<ReviewCard> {
                                           ),
                                         ],
                                       ),
-                                      if (index1 < 2)
+                                      if ((state.tabBarIndex == 0 &&
+                                              index1 < 2) ||
+                                          (state.tabBarIndex == 1 &&
+                                              index1 < 1))
                                         Padding(
                                           padding: EdgeInsets.only(left: 2.w),
                                           child: SizedBox(
@@ -126,16 +133,30 @@ class _ReviewCardState extends State<ReviewCard> {
                       Expanded(
                         child: ListView.separated(
                           shrinkWrap: true,
-                          itemCount: 3,
+                          itemCount: state.tabBarIndex == 0 ? 3 : 2,
                           padding: EdgeInsets.zero,
                           physics: const NeverScrollableScrollPhysics(),
                           separatorBuilder: (context, index) => SizedBox(
                             height: 11.h,
                           ),
                           itemBuilder: (context, index1) {
+                            List<Map<String, String>> injectorTitles = [
+                              {
+                                'Tank 1': 'Nitrogen',
+                              },
+                              {
+                                'Volume ${widget.reviewItem.volume} litres':
+                                    '60 mins',
+                              },
+                              {
+                                '${widget.reviewItem.mode == 'bulk' ? 'Bulk' : 'Spred'} Mode':
+                                    '',
+                              },
+                            ];
                             return Text.rich(
                               TextSpan(
-                                text: '${injectorTitles[index1]}  ',
+                                text:
+                                    '${injectorTitles.elementAt(index1).keys.first}  ',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge
@@ -146,7 +167,10 @@ class _ReviewCardState extends State<ReviewCard> {
                                 children: [
                                   if (index1 < 2)
                                     TextSpan(
-                                      text: 'Nitrogen',
+                                      text: injectorTitles
+                                          .elementAt(index1)
+                                          .values
+                                          .first,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium
@@ -199,7 +223,7 @@ class _ReviewCardState extends State<ReviewCard> {
                                           height: 4.h,
                                         ),
                                         Text(
-                                          '5 min',
+                                          '${widget.reviewItem.preMix} min',
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodySmall
@@ -227,7 +251,7 @@ class _ReviewCardState extends State<ReviewCard> {
                                           height: 4.h,
                                         ),
                                         Text(
-                                          '40 min',
+                                          '${widget.reviewItem.fertigation} min',
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodySmall
@@ -257,7 +281,7 @@ class _ReviewCardState extends State<ReviewCard> {
                                           height: 4.h,
                                         ),
                                         Text(
-                                          '5 min',
+                                          '${widget.reviewItem.postMix} min',
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodySmall
