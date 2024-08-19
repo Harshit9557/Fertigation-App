@@ -1,3 +1,4 @@
+import 'package:fertigation/config/components/review_card.dart';
 import 'package:flutter/material.dart';
 
 class SequentialScreen extends StatefulWidget {
@@ -10,6 +11,15 @@ class SequentialScreen extends StatefulWidget {
 class _SequentialScreenState extends State<SequentialScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ListView.separated(
+      itemCount: 3,
+      shrinkWrap: true,
+      separatorBuilder: (context, index) => const Divider(),
+      itemBuilder: (context, index) {
+        return const ReviewCard(
+          isSequential: true,
+        );
+      },
+    );
   }
 }

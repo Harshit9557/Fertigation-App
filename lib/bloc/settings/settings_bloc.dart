@@ -11,11 +11,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
   void _updateTheme(UpdateThemeEvent event, Emitter<SettingsState> emit) {
     // Do not perform any work if new and old ThemeMode are identical
-    if (state.themeMode == event.themeMode) {
-      return;
-    } else {
-      emit(state.copyWith(themeMode: event.themeMode));
-    }
+    // if (state.themeMode == event.themeMode) {
+    //   return;
+    // } else {
+
+    // }
+    emit(state.copyWith(themeMode: event.themeMode));
 
     //settingsController.updateThemeMode(event.themeMode);
   }

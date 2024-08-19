@@ -6,3 +6,4 @@ export 'package:flutter/material.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
+export 'package:fertigation/bloc/tabbar/tabbar_bloc.dart';

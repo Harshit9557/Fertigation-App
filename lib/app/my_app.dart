@@ -13,9 +13,12 @@ class FertigationApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => SettingsBloc()),
+        BlocProvider(create: (_) => TabbarBloc()),
       ],
       child: ScreenUtilInit(builder: (context, _) {
         return BlocBuilder<SettingsBloc, SettingsState>(
+          buildWhen: (previous, current) =>
+              previous.themeMode != current.themeMode,
           builder: (context, state) {
             return MaterialApp(
               //Set this false to hide the debug banner

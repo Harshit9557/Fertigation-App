@@ -5,12 +5,12 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
   dividerColor: ThemeConfig.dividerColorDark,
   appBarTheme: AppBarTheme(
     centerTitle: false,
-    titleSpacing: 20.w,
+    titleSpacing: 5.w,
     titleTextStyle: ThemeData.light().textTheme.displayLarge!.copyWith(
           fontFamily: ThemeConfig.pangramRegular,
           color: Colors.white,
-          fontSize: 22.sp,
-          fontWeight: FontWeight.w600,
+          fontSize: 18.sp,
+          fontWeight: FontWeight.bold,
         ),
     toolbarTextStyle: ThemeData.light().textTheme.displayMedium!.copyWith(
           fontFamily: ThemeConfig.pangramRegular,
@@ -43,6 +43,9 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
           fontWeight: FontWeight.w400,
         ),
         bodyMedium: GoogleFonts.roboto(
+          color: ThemeConfig.textColorBCBFC2,
+        ),
+        bodyLarge: GoogleFonts.roboto(
           color: ThemeConfig.textColorBCBFC2,
         ),
       ),
